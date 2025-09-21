@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soumettre un projet – ICDS</title>
+
+  <style>
+    /* Reset */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #223344;
+      /* Image de fond */
+      background: url('ton-image.jpg') no-repeat center center/cover;
+      position: relative;
+    }
+
+    /* Overlay semi-transparent */
+    body::before {
+      content: "";
+      position: absolute;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(240, 246, 255, 0.6);
+      z-index: 0;
+    }
+
+    header, nav, main, footer {
+      position: relative; /* Pour rester au-dessus de l’overlay */
+      z-index: 1;
+    }
+
+    /* Header */
+    header {
+      background: #002147;
+      color: white;
+      text-align: center;
+      padding: 50px 20px 40px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header h1 {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      margin: 0;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 900;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+    }
+
+    /* Navigation dynamique */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #003366;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      background-color: #4caf50;
+      transform: scale(1.05);
+      outline: none;
+      box-shadow: 0 0 10px #4caf50;
+    }
+
+    /* Hamburger menu pour mobile */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      width: 35px;
+      height: 30px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+    }
+    .menu-toggle span {
+      display: block;
+      height: 4px;
+      background: white;
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: 0.3s ease;
+    }
+    .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(6px,6px);}
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(7px,-7px); }
+
+    @media (max-width: 768px){
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #002147;
+        flex-direction: column;
+        width: 200px;
+        padding: 1rem 0;
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      .nav-links.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+      .menu-toggle { display: flex; }
+      .nav-links a {
+        padding: 0.8rem 1.5rem;
+        font-size: 1.1rem;
+        border-radius: 0;
+        box-shadow: none;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
+      }
+      .nav-links a:last-child { border-bottom: none; }
+    }
+
+    /* Form container */
+    main.container {
+      background: white;
+      max-width: 720px;
+      margin: 50px auto 60px;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    main.container:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+
+    h2 { color: #002147; margin-bottom: 30px; font-weight: 800; font-size: 2rem; text-align:center; letter-spacing:1.5px; text-transform:uppercase; }
+
+    label { display: block; margin-top: 20px; font-weight:700; font-size:1.1rem; color:#223344; }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 14px 18px;
+      margin-top: 8px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      font-family: inherit;
+      resize: vertical;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: #4caf50;
+      box-shadow: 0 0 8px #a7d89d;
+      outline: none;
+      background-color: #f9fff8;
+    }
+
+    textarea { min-height: 140px; line-height: 1.5; }
+
+    /* Submit button */
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #4caf50, #388e3c);
+      color: white;
+      padding: 14px 28px;
+      margin-top: 30px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 8px 20px rgba(76,175,80,0.4);
+      transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.25s ease;
+    }
+
+    .btn:hover, .btn:focus {
+      background: linear-gradient(135deg, #388e3c, #2e7d32);
+      box-shadow: 0 12px 30px rgba(56,142,60,0.6);
+      transform: scale(1.03);
+      outline: none;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #002147;
+      color: white;
+      text-align: center;
+      padding: 25px 20px;
+      font-size: 0.95rem;
+      letter-spacing: 0.6px;
+      margin-top: auto;
+      box-shadow: 0 -3px 10px rgba(0,0,0,0.2);
+    }
+    footer a { color: #4caf50; text-decoration: none; transition: color 0.3s; }
+    footer a:hover, footer a:focus { color:#81c784; outline:none; }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Soumettre un Projet Sportif</h1>
+  </header>
+
+  <nav>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="primary-navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-links" id="primary-navigation">
+      <a href="index.html">Accueil</a>
+      <a href="projets.html">Projets</a>
+      <a href="soumettre-projet.html" aria-current="page">Soumettre un projet</a>
+      <a href="sponsors.html">Sponsors</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h2>Formulaire de soumission</h2>
+    <form action="#" method="POST" enctype="multipart/form-data" novalidate>
+      <label for="nom">Nom du porteur de projet</label>
+      <input type="text" id="nom" name="nom" placeholder="Votre nom complet" required autocomplete="name" />
+
+      <label for="structure">Structure ou organisation</label>
+      <input type="text" id="structure" name="structure" placeholder="Nom de la structure ou organisation" autocomplete="organization" />
+
+      <label for="discipline">Discipline sportive</label>
+      <select id="discipline" name="discipline" required>
+        <option value="" disabled selected>-- Choisir --</option>
+        <option value="football">Football</option>
+        <option value="basketball">Basketball</option>
+        <option value="athletisme">Athlétisme</option>
+        <option value="autre">Autre</option>
+      </select>
+
+      <label for="budget">Budget estimé (USD)</label>
+      <input type="text" id="budget" name="budget" placeholder="Ex: 30000" required inputmode="numeric" pattern="[0-9\s]+" title="Veuillez entrer un montant en chiffres" />
+
+      <label for="description">Description du projet</label>
+      <textarea id="description" name="description" placeholder="Décrivez brièvement votre projet" required></textarea>
+
+      <label for="fichier">Dossier du projet (PDF ou image)</label>
+      <input type="file" id="fichier" name="fichier" accept=".pdf,image/*" />
+
+      <button type="submit" class="btn">Envoyer le projet</button>
+    </form>
+  </main>
+
+  <footer id="contact">
+    <p>Contact : <a href="mailto:info@icds-rdc.org">info@icds-rdc.org</a> | +243 000 000 000</p>
+    <p>Suivez-nous sur les réseaux : 
+      <a href="#" aria-label="Facebook">Facebook</a> | 
+      <a href="#" aria-label="Twitter">Twitter</a> | 
+      <a href="#" aria-label="LinkedIn">LinkedIn</a>
+    </p>
+  </footer>
+
+  <script>
+    // Menu toggle mobile
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuToggle.addEventListener('click', () => {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+      menuToggle.setAttribute('aria-expanded', !expanded);
+      menuToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

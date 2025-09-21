@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact & ICDS</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* RESET */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f3f7fb;
+      color: #222;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    a:hover, a:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    /* NAVIGATION */
+    nav {
+      background-color: #002147;
+      text-align: center;
+      padding: 1rem 0;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 18px;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 14px;
+      border-radius: 25px;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover,
+    nav a:focus {
+      background-color: #4caf50;
+      box-shadow: 0 0 8px #4caf50cc;
+      outline: none;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #003366 0%, #00509e 100%);
+      color: white;
+      padding: 70px 20px 50px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    header h1 {
+      font-size: 2.8rem;
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    }
+    header p {
+      font-size: 1.25rem;
+      font-weight: 500;
+      opacity: 0.85;
+      margin-top: 0;
+      font-style: italic;
+    }
+
+    /* MAIN */
+    main {
+      flex-grow: 1;
+      max-width: 700px;
+      margin: 40px auto 70px;
+      padding: 25px 30px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.07);
+      transition: box-shadow 0.3s ease;
+    }
+    main:hover {
+      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    }
+    section {
+      margin-bottom: 45px;
+    }
+    h2 {
+      color: #002147;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      border-left: 6px solid #4caf50;
+      padding-left: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    h3 {
+      margin-top: 25px;
+      font-weight: 600;
+      color: #004080;
+    }
+    p {
+      font-size: 1.1rem;
+      color: #444;
+    }
+
+    /* CONTACT INFO BOX */
+    .contact-info {
+      background-color: #e8f0fe;
+      padding: 30px 25px;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      color: #002147;
+      box-shadow: inset 0 0 12px #d6e4ff;
+      user-select: none;
+    }
+    .contact-info p {
+      margin: 8px 0;
+    }
+
+    /* SOCIAL LINKS */
+    .social-links {
+      margin-top: 20px;
+      font-weight: 600;
+      color: #002147;
+      user-select: none;
+    }
+    .social-links a {
+      margin-right: 20px;
+      color: #002147;
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
+    .social-links a:hover,
+    .social-links a:focus {
+      color: #4caf50;
+      outline: none;
+    }
+
+    /* FORM */
+    form label {
+      display: block;
+      margin-top: 20px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #003366;
+      user-select: none;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 14px 18px;
+      margin-top: 8px;
+      border: 1.8px solid #bbb;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      resize: vertical;
+      outline-offset: 3px;
+    }
+    form input:focus, form textarea:focus {
+      border-color: #4caf50;
+      box-shadow: 0 0 10px #4caf5077;
+      outline: none;
+    }
+    form textarea {
+      min-height: 140px;
+      font-size: 1.05rem;
+    }
+    form button {
+      margin-top: 30px;
+      padding: 16px 38px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 22px #4caf5033;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    form button:hover,
+    form button:focus {
+      background-color: #388e3c;
+      box-shadow: 0 14px 35px #2e7d32cc;
+      outline: none;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: #002147;
+      color: white;
+      text-align: center;
+      padding: 22px 15px;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      user-select: none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.1rem;
+      }
+      header p {
+        font-size: 1.05rem;
+      }
+      nav a {
+        margin: 0 12px;
+        font-size: 0.9rem;
+      }
+      main {
+        margin: 25px 20px 50px;
+        padding: 20px 20px;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+    }
+    @media (max-width: 450px) {
+      nav {
+        font-size: 0.85rem;
+      }
+      form button {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="projets.html">Projets</a>
+    <a href="soumettre-projet.html">Soumettre un projet</a>
+    <a href="sponsors.html">Sponsors</a>
+    <a href="actualites.html">Actualités</a>
+    <a href="forum.html">Forum</a>
+    <a href="contact.html" aria-current="page">Contact</a>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <h1>Contact & ICDS</h1>
+    <p>Entrer en contact avec l’Initiative Congolaise pour le Développement Sportif</p>
+  </header>
+
+  <!-- Main content -->
+  <main>
+    <section class="contact-info" aria-label="Informations sur l'ICDS">
+      <h2>À propos de l’ICDS</h2>
+      <p>
+        L’Initiative Congolaise pour le Développement Sportif (ICDS) est une organisation dédiée à la promotion et au développement du sport en République Démocratique du Congo.
+        Notre mission est de valoriser les projets sportifs, faciliter le partenariat entre sponsors et acteurs du sport, et contribuer à l’épanouissement sportif national.
+      </p>
+      <h3>Coordonnées</h3>
+      <p>Téléphone : +243 000 000 000</p>
+      <p>Email : <a href="mailto:info@icds-rdc.org">info@icds-rdc.org</a></p>
+      <p>Adresse : Palais du Peuple, Kinshasa, RDC</p>
+      <div class="social-links">
+        <strong>Suivez-nous :</strong>
+        <a href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">Twitter</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </section>
+
+    <section aria-label="Formulaire de contact">
+      <h2>Formulaire de contact</h2>
+      <form action="#" method="POST" novalidate>
+        <label for="nom">Nom complet</label>
+        <input type="text" id="nom" name="nom" placeholder="Jean Dupont" required />
+
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" name="email" placeholder="exemple@email.com" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Votre message..." required></textarea>
+
+        <button type="submit">Envoyer</button>
+      </form>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p>© 2025 ICDS - Initiative Congolaise pour le Développement Sportif</p>
+  </footer>
+
+</body>
+</html>

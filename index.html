@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ICDS - Initiative Congolaise pour le Développement Sportif</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fois.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* RESET */
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #f8f9fa;
+    }
+
+    /* Background image */
+    background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('PP.png') no-repeat center center/cover;
+      z-index: -1;
+    }
+
+    /* HEADER */
+    header {
+      background: rgba(0, 33, 71, 0.4);
+      backdrop-filter: blur(6px);
+      color: #f5f1f1;
+      padding: 1.5rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: transform 0.3s ease;
+    }
+    header.hidden { transform: translateY(-100%); }
+    .logo { display: flex; align-items: center; gap: 0.8rem; }
+    .logo img { height: 40px; width: auto; }
+    header h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* NAVIGATION */
+    nav { position: relative; }
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .nav-links a {
+      color: #f7f7f7;
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .nav-links a:hover,
+    .nav-links a:focus {
+      background-color: #4CAF50;
+      color: #fff;
+      outline: none;
+      box-shadow: 0 4px 12px rgba(76,175,80,0.7);
+    }
+
+    /* Hamburger menu */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      width: 35px;
+      height: 30px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+    }
+    .menu-toggle span {
+      display: block;
+      height: 4px;
+      background: white;
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: 0.3s ease;
+    }
+    .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+    /* Responsive menu */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: rgba(0, 33, 71, 0.4);
+        backdrop-filter: blur(6px);
+        flex-direction: column;
+        width: 200px;
+        padding: 1rem 0;
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        z-index: 1001;
+      }
+      .nav-links.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+      .nav-links a { padding: 0.8rem 1.5rem; font-size: 1.1rem; border-radius: 0; box-shadow: none; border-bottom: 1px solid rgba(255,255,255,0.15); }
+      .nav-links a:last-child { border-bottom: none; }
+      .menu-toggle { display: flex; }
+    }
+
+    /* SECTIONS */
+    .section {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+    .section h2 {
+      color: white;
+      border-left: 6px solid #4CAF50;
+      padding-left: 12px;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+    }
+    .section p {
+      font-size: 1.05rem;
+      max-width: 900px;
+      margin-bottom: 2rem;
+      color: white;
+    }
+
+    /* GRID CARDS */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1.8rem; }
+    .card {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      padding: 1.8rem 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      color: white;
+    }
+    .card:hover, .card:focus-within {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+    }
+    .card h3 { color: #4CAF50; margin-bottom: 1rem; font-weight: 700; font-size: 1.3rem; }
+    .card p { flex-grow: 1; font-size: 1rem; margin-bottom: 1.4rem; line-height: 1.4; color: white; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 5px 15px rgba(76,175,80,0.5);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+    .btn:hover, .btn:focus { background-color: #388e3c; box-shadow: 0 8px 25px rgba(56,142,60,0.8); outline: none; }
+
+    /* SPONSORS */
+    .sponsor-section { max-width: 1100px; margin: 3rem auto; padding: 0 1rem; text-align: center; }
+    .sponsor-section h2 { color: white; border-left: 6px solid #4CAF50; padding-left: 12px; margin-bottom: 2rem; font-weight: 700; font-size: 1.8rem; text-align: left; }
+    .sponsor-carousel { display: flex; gap: 2rem; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 1rem; scrollbar-width: none; -ms-overflow-style: none; }
+    .sponsor-carousel::-webkit-scrollbar { display: none; }
+    .sponsor-carousel a {
+      flex: 0 0 auto;
+      width: 120px;
+      height: 70px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    .sponsor-carousel a img { max-width: 80%; max-height: 80%; object-fit: contain; }
+    .sponsor-carousel a:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 30px rgba(76,175,80,0.5);
+      backdrop-filter: blur(10px);
+    }
+
+    /* FOOTER */
+    footer {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      color: white;
+      text-align: center;
+      padding: 1rem 1rem;
+      font-size: 0.9rem;
+    }
+    footer p { margin: 0.3rem 0; font-weight: 300; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header h1 { font-size: 1.3rem; }
+      .section h2 { font-size: 1.5rem; }
+      .btn { padding: 10px 22px; font-size: 0.95rem; }
+      .sponsor-carousel a { width: 90px; height: 50px; }
+    }
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.1rem; }
+      .section h2 { font-size: 1.3rem; }
+      .btn { padding: 8px 18px; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <background></background>
+
+  <header>
+    <div class="logo">
+      <img src="logo.jpg" alt="Logo ICDS" />
+      <h1>ICDS - Initiative Congolaise pour le Développement Sportif</h1>
+    </div>
+    <nav>
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="primary-navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="primary-navigation" role="menu">
+        <a href="#">Accueil</a>
+        <a href="projets.html">Projets</a>
+        <a href="actualites.html">Actualités</a>
+        <a href="sponsors.html">Sponsors</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="section" id="a-propos">
+    <h2>À propos de l’ICDS</h2>
+    <p>L’ICDS est une initiative visant à promouvoir le développement du sport en République Démocratique du Congo en facilitant la mise en relation entre porteurs de projets sportifs et sponsors.</p>
+  </section>
+
+  <section class="section" id="projet">
+    <h2>Projets sportifs à la une</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Académie de football Kinshasa</h3>
+        <p>Un projet pour former les jeunes talents de 12 à 18 ans dans la capitale congolaise.</p>
+      </article>
+      <article class="card">
+        <h3>Centre d’athlétisme de Goma</h3>
+        <p>Création d’un espace d’entraînement pour les jeunes athlètes du Nord-Kivu.</p>
+      </article>
+    </div>
+    <br />
+    <a class="btn" href="projets.html">Voir tous les projets</a>
+  </section>
+
+  <section class="section" id="actus">
+    <h2>Actualités sportives</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Championnat U20 2025</h3>
+        <p>Les jeunes équipes régionales s’affrontent à Kinshasa dans un tournoi national.</p>
+      </article>
+      <article class="card">
+        <h3>Lancement du Forum national</h3>
+        <p>Un événement inédit sur le sponsoring sportif prévu en novembre.</p>
+      </article>
+    </div>
+    <br />
+    <a class="btn" href="actualites.html">Voir toutes les actualités</a>
+  </section>
+
+  <section class="sponsor-section">
+    <h2>Nos sponsors partenaires</h2>
+    <div class="sponsor-carousel">
+      <a href="#"><img src="sponsor1-logo.png" alt="Logo Sponsor 1" /></a>
+      <a href="#"><img src="sponsor2-logo.png" alt="Logo Sponsor 2" /></a>
+      <a href="#"><img src="sponsor3-logo.png" alt="Logo Sponsor 3" /></a>
+      <a href="#"><img src="sponsor4-logo.png" alt="Logo Sponsor 4" /></a>
+      <a href="#"><img src="sponsor5-logo.png" alt="Logo Sponsor 5" /></a>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p>© 2025 ICDS. Tous droits réservés.</p>
+    <p>Contact : contact@icds-rdc.org | +243 123 456 789</p>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuToggle.addEventListener('click', () => {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+      menuToggle.setAttribute('aria-expanded', !expanded);
+      menuToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+
+    let lastScroll = 0;
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        header.classList.add('hidden');
+      } else {
+        header.classList.remove('hidden');
+      }
+      lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+    });
+  </script>
+
+</body>
+</html>

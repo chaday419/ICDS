@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Devenir Sponsor – ICDS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* RESET */
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f9fafc; color: #2c3e50;
+      line-height: 1.6; min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+
+    /* HEADER & NAV */
+    header {
+      background: linear-gradient(135deg, #003366 0%, #00509e 100%);
+      color: white; padding: 20px; position: sticky;
+      top: 0; z-index: 1000; display: flex;
+      justify-content: space-between; align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    .logo h1 { margin: 0; font-size: 1.6rem; font-weight: 700; letter-spacing: 2px; }
+    nav { position: relative; }
+    .nav-links { display: flex; gap: 1.2rem; font-weight: 600; }
+    .nav-links a {
+      color: white; text-decoration: none; padding: 8px 16px;
+      border-radius: 30px; transition: background-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .nav-links a:hover { background-color: #4caf50; box-shadow: 0 4px 12px rgba(76,175,80,0.7); }
+
+    /* Hamburger */
+    .menu-toggle { display: none; flex-direction: column; width: 35px; height: 30px; cursor: pointer; background: none; border: none; padding: 0; }
+    .menu-toggle span { display: block; height: 4px; background: white; margin: 4px 0; border-radius: 2px; transition: 0.3s; }
+    .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(6px,6px); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(7px,-7px); }
+
+    @media (max-width: 768px) {
+      .nav-links { 
+        position: absolute; top: 100%; right: 0;
+        background: #003366; flex-direction: column; width: 200px;
+        padding: 1rem 0; border-radius: 0 0 12px 12px;
+        opacity: 0; pointer-events: none; transform: translateY(-10px);
+        transition: opacity 0.3s, transform 0.3s; z-index: 1001;
+      }
+      .nav-links.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+      .nav-links a { padding: 0.8rem 1.5rem; font-size: 1.1rem; border-radius: 0; box-shadow: none; border-bottom: 1px solid rgba(255,255,255,0.15);}
+      .nav-links a:last-child { border-bottom: none; }
+      .menu-toggle { display: flex; }
+    }
+
+    /* SECTIONS & CONTENT */
+    .section { max-width: 960px; margin: 40px auto; padding: 0 20px; }
+    .section h2 { font-size: 2rem; font-weight: 700; color: #002147; margin-bottom: 25px; border-left: 6px solid #4caf50; padding-left: 12px; }
+    .benefits-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 24px; }
+    .benefit { background: #fff; padding: 28px 22px; border-radius: 12px; box-shadow: 0 12px 28px rgba(0,0,0,0.07); transition: transform 0.3s, box-shadow 0.3s; }
+    .benefit:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+    .sponsor-logos { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: center; margin-top: 20px; }
+    .sponsor-logos img { max-height: 70px; filter: grayscale(60%); transition: filter 0.3s, transform 0.3s; }
+    .sponsor-logos img:hover { filter: grayscale(0%); transform: scale(1.1); }
+
+    form { background: white; padding: 32px 36px; border-radius: 14px; box-shadow: 0 16px 40px rgba(0,0,0,0.08); max-width: 600px; margin: 0 auto 80px; transition: box-shadow 0.3s; }
+    form:hover { box-shadow: 0 24px 48px rgba(0,0,0,0.15); }
+    label { display: block; font-weight: 600; margin-top: 18px; color: #003366; }
+    input, textarea { width: 100%; margin-top: 8px; padding: 14px 16px; border: 1.8px solid #ccc; border-radius: 10px; font-size: 1rem; }
+    input:focus, textarea:focus { border-color: #4caf50; box-shadow: 0 0 10px #4caf5077; outline: none; }
+    textarea { min-height: 120px; }
+    .btn { display: block; width: 100%; max-width: 320px; margin: 30px auto 0; padding: 14px 0; background-color: #4caf50; border: none; border-radius: 50px; color: white; font-weight: 700; font-size: 1.15rem; cursor: pointer; box-shadow: 0 10px 26px #4caf5033; }
+    .btn:hover { background-color: #388e3c; box-shadow: 0 14px 38px #2e7d32cc; }
+
+    footer { background-color: #003366; color: white; text-align: center; padding: 28px 20px; font-size: 0.95rem; }
+    footer p + p { margin-top: 8px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo"><h1>Devenir Sponsor – ICDS</h1></div>
+    <nav>
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="primary-navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links" id="primary-navigation">
+        <a href="index.html">Accueil</a>
+        <a href="projets.html">Projets</a>
+        <a href="actualites.html">Actualités</a>
+        <a href="sponsors.html">Sponsors</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="section">
+    <h2>Pourquoi devenir sponsor via ICDS ?</h2>
+    <div class="benefits-list">
+      <article class="benefit"><h3>Visibilité nationale</h3><p>Votre marque sera mise en avant sur notre plateforme et lors des événements sportifs.</p></article>
+      <article class="benefit"><h3>Impact social</h3><p>Contribuez au développement des jeunes talents et à la paix par le sport.</p></article>
+      <article class="benefit"><h3>Reconnaissance officielle</h3><p>Vous recevrez un certificat de partenariat validé par le Ministère des Sports.</p></article>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Ils nous font déjà confiance</h2>
+    <div class="sponsor-logos">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Orange_logo.svg" alt="Logo Orange RDC" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/TotalEnergies_Logo.svg" alt="Logo Total" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/MTN_Logo.svg" alt="Logo MTN" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Unicef_Logo.png" alt="Logo UNICEF" />
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Devenir sponsor dès aujourd’hui</h2>
+    <form action="#" method="POST" novalidate>
+      <label for="nom">Nom complet</label>
+      <input type="text" id="nom" name="nom" required placeholder="Jean Dupont">
+      <label for="entreprise">Entreprise / Organisation</label>
+      <input type="text" id="entreprise" name="entreprise" required placeholder="Nom de votre entreprise">
+      <label for="email">Adresse e-mail</label>
+      <input type="email" id="email" name="email" required placeholder="exemple@email.com">
+      <label for="telephone">Téléphone</label>
+      <input type="tel" id="telephone" name="telephone" placeholder="+243 000 000 000">
+      <label for="message">Type de sponsoring ou message</label>
+      <textarea id="message" name="message" placeholder="Décrivez votre projet ou vos attentes"></textarea>
+      <button type="submit" class="btn">Envoyer ma demande</button>
+    </form>
+  </section>
+
+  <footer id="contact">
+    <p>Contact : <a href="mailto:info@icds-rdc.org" style="color:#4caf50;">info@icds-rdc.org</a> | +243 000 000 000</p>
+    <p>© 2025 ICDS. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    menuToggle.addEventListener('click', () => {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+      menuToggle.setAttribute('aria-expanded', !expanded);
+      menuToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+  </script>
+
+</body>
+</html>

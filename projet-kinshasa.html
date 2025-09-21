@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projet – Académie de Football Kinshasa | ICDS</title>
+  <style>
+    /* Reset basique */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #e6f0fa 0%, #ffffff 100%);
+      color: #2c3e50;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      scroll-behavior: smooth;
+    }
+
+    /* Header */
+    header {
+      position: relative;
+      background: url('https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fefefe;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+      font-weight: 700;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      overflow: hidden;
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+      transition: filter 0.5s ease;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+      z-index: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    header h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      text-align: center;
+      padding: 0 20px;
+      user-select: none;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      filter: drop-shadow(0 0 5px rgba(76,175,80,0.9));
+    }
+
+    /* Navigation */
+    nav {
+      background-color: #002147;
+      display: flex;
+      justify-content: center;
+      padding: 12px 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: #f0f0f0;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 10px 18px;
+      border-radius: 25px;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      white-space: nowrap;
+      user-select: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    nav a:hover,
+    nav a:focus {
+      background-color: #4caf50;
+      color: white;
+      outline: none;
+      box-shadow: 0 0 12px #4caf50;
+      transform: scale(1.08);
+      cursor: pointer;
+    }
+
+    /* Container principal */
+    .container {
+      max-width: 1100px;
+      margin: 50px auto 80px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 2.5fr 1fr;
+      gap: 48px;
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Description */
+    .project-description h2 {
+      color: #002147;
+      font-weight: 700;
+      font-size: 2.2rem;
+      margin-bottom: 0.5em;
+      border-left: 6px solid #4caf50;
+      padding-left: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      user-select: none;
+    }
+
+    .project-description p {
+      font-size: 1.15rem;
+      margin-bottom: 1.3em;
+      color: #34495e;
+    }
+
+    .project-description ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 1.8em;
+    }
+
+    .project-description ul li {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 14px;
+      font-size: 1.1rem;
+      color: #2c3e50;
+      transition: color 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+
+    .project-description ul li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #4caf50;
+      font-weight: bold;
+      font-size: 1.3rem;
+      top: 0;
+      line-height: 1;
+      text-shadow: 0 0 2px #4caf50aa;
+    }
+
+    .project-description ul li:hover {
+      color: #388e3c;
+    }
+
+    /* Boutons */
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #4caf50, #388e3c);
+      color: white;
+      padding: 14px 32px;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.15rem;
+      transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+      box-shadow: 0 8px 25px rgba(76,175,80,0.35);
+      user-select: none;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .btn:hover,
+    .btn:focus {
+      background: linear-gradient(135deg, #388e3c, #2e7d32);
+      box-shadow: 0 12px 38px rgba(56,142,60,0.65);
+      outline: none;
+      transform: scale(1.07);
+    }
+
+    /* Sidebar */
+    .project-sidebar {
+      background-color: #f4f8fb;
+      padding: 28px 32px;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 36px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .project-sidebar:hover {
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+
+    .project-sidebar h3 {
+      margin-top: 0;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #4caf50;
+      border-bottom: 3px solid #4caf50;
+      padding-bottom: 10px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    .project-sidebar ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .project-sidebar ul li {
+      font-size: 1.05rem;
+      color: #2c3e50;
+      margin-bottom: 12px;
+      padding-left: 24px;
+      position: relative;
+      user-select: none;
+      transition: color 0.3s ease;
+      cursor: default;
+    }
+
+    .project-sidebar ul li::before {
+      content: '•';
+      color: #4caf50;
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+      font-size: 1.3rem;
+      line-height: 1;
+      top: 2px;
+      text-shadow: 0 0 3px #4caf50aa;
+    }
+
+    .project-sidebar ul li:hover {
+      color: #388e3c;
+    }
+
+    .project-sidebar p {
+      margin: 8px 0;
+      font-size: 1.05rem;
+      color: #34495e;
+      user-select: none;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #002147;
+      color: white;
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 0.95rem;
+      user-select: none;
+      letter-spacing: 0.8px;
+      margin-top: auto;
+      box-shadow: 0 -5px 15px rgba(0,0,0,0.25);
+      transition: background-color 0.3s ease;
+    }
+
+    footer p {
+      margin: 8px 0;
+    }
+
+    footer a {
+      color: #4caf50;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover,
+    footer a:focus {
+      color: #81c784;
+      outline: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .container {
+        grid-template-columns: 1fr;
+        padding: 0 30px;
+        gap: 36px;
+      }
+
+      header {
+        height: 220px;
+        font-size: clamp(1.5rem, 5vw, 2.5rem);
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav a {
+        margin: 6px 8px;
+        font-size: 0.95rem;
+        padding: 8px 14px;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        font-size: 1.05rem;
+      }
+
+      .project-description h2 {
+        font-size: 1.8rem;
+      }
+
+      .project-sidebar h3 {
+        font-size: 1.3rem;
+      }
+
+      .project-description p,
+      .project-sidebar p,
+      .project-description ul li,
+      .project-sidebar ul li {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      nav {
+        padding: 8px 12px;
+      }
+      nav a {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+      }
+      .btn {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Académie de Football Kinshasa</h1>
+  </header>
+
+  <!-- Navigation -->
+  <nav role="navigation" aria-label="Menu principal">
+    <a href="index.html" aria-label="Accueil">Accueil</a>
+    <a href="projets.html" aria-label="Projets">Projets</a>
+    <a href="actualites.html" aria-label="Actualités">Actualités</a>
+    <a href="sponsors.html" aria-label="Sponsors">Sponsors</a>
+    <a href="#contact" aria-label="Contact">Contact</a>
+  </nav>
+
+  <!-- Contenu principal -->
+  <main class="container" role="main" aria-labelledby="description-title">
+    <!-- Colonne gauche : Description -->
+    <section class="project-description">
+      <h2 id="description-title">Description du projet</h2>
+      <p>
+        L’Académie de Football Kinshasa est un projet destiné à former les jeunes talents sportifs de 12 à 18 ans dans un cadre professionnel et structuré. Située dans la capitale congolaise, l'académie propose des formations techniques, un suivi médical et un accompagnement éducatif pour préparer les jeunes à une carrière sportive de haut niveau.
+      </p>
+      <p>
+        Le projet est soutenu par plusieurs anciens joueurs professionnels et encadré par des entraîneurs certifiés. L’objectif est également de favoriser l’inclusion sociale à travers le sport.
+      </p>
+
+      <h2>Objectifs</h2>
+      <ul>
+        <li>Former 200 jeunes par an</li>
+        <li>Créer 10 emplois locaux (entraîneurs, staff)</li>
+        <li>Participer aux compétitions nationales U17/U20</li>
+      </ul>
+
+      <a href="projets.html" class="btn" aria-label="Retour à la liste des projets">← Retour à la liste</a>
+    </section>
+
+    <!-- Colonne droite : Infos projet -->
+    <aside class="project-sidebar" aria-labelledby="sidebar-title">
+      <h3 id="sidebar-title">Besoins du projet</h3>
+      <ul>
+        <li>Matériel (ballons, maillots, équipements)</li>
+        <li>Soutien financier (30 000 $ sur 1 an)</li>
+        <li>Transport et logistique</li>
+      </ul>
+
+      <h3>Informations</h3>
+      <p><strong>Localisation :</strong> Kinshasa</p>
+      <p><strong>Discipline :</strong> Football</p>
+      <p><strong>Porté par :</strong> ONG Sport et Espoir</p>
+
+      <a href="sponsors.html" class="btn" aria-label="Je souhaite sponsoriser le projet">Je souhaite sponsoriser</a>
+    </aside>
+  </main>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <p>Contact : <a href="mailto:info@icds-rdc.org">info@icds-rdc.org</a> | +243 000 000 000</p>
+    <p>Suivez-nous sur : 
+      <a href="#" aria-label="Facebook">Facebook</a> | 
+      <a href="#" aria-label="Twitter">Twitter</a> | 
+      <a href="#" aria-label="LinkedIn">LinkedIn</a>
+    </p>
+  </footer>
+
+</body>
+</html>
