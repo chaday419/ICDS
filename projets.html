@@ -5,73 +5,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projets sportifs – ICDS</title>
   <style>
-    
+    /* Base & reset */
     body {
-      margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #473939;
-      color: #333;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      margin: 0; padding: 0;
+      background-color: #f5f7fa;
+      color: #2c3e50;
+      line-height: 1.6;
     }
-    
-    
-    /* HEADER AVEC IMAGE + OVERLAY */
+
+    /* Header avec image et overlay */
     .header-banner {
       position: relative;
       background: url('https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-      color: rgb(246, 236, 236);
-      padding: 10px 20px;
+      color: #fff;
       text-align: center;
+      padding: 80px 20px;
       overflow: hidden;
     }
 
     .header-banner::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
-      z-index: 0;
+      content:"";
+      position:absolute; inset:0;
+      background: rgba(0,0,0,0.45);
     }
 
     .header-banner h1 {
       position: relative;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7);
+      font-size: clamp(2.5rem,5vw,3.5rem);
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
       margin: 0;
-      user-select: none;
-      z-index: 1;
     }
 
+    /* Navigation */
     nav {
-      background-color: #002147;
-      padding: 12px 20px;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      display: flex;
+      justify-content: center;
+      background: #1a2a47;
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
     nav a {
-      color: white;
+      color: #ecf0f1;
       margin: 0 15px;
       text-decoration: none;
       font-weight: 600;
-      font-size: 1rem;
-      padding: 8px 12px;
-      border-radius: 4px;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-      display: inline-block;
+      padding: 8px 15px;
+      border-radius: 30px;
+      transition: all 0.3s;
     }
 
-    nav a:focus-visible,
-    nav a:hover {
-      background-color: #4caf50;
-      box-shadow: 0 0 8px #4caf50;
+    nav a:hover,
+    nav a:focus-visible {
+      background: #4CAF50;
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(46,204,113,0.4);
       outline: none;
       cursor: pointer;
     }
 
+    /* Section principale */
     .section {
       padding: 40px 20px;
       max-width: 1100px;
@@ -80,35 +76,35 @@
 
     h2.section-title {
       text-align: left;
-      color: #002147;
-      border-left: 5px solid #4caf50;
-      padding-left: 12px;
-      margin-bottom: 30px;
-      text-transform: uppercase;
-      user-select: none;
       font-weight: 700;
-      letter-spacing: 2px;
-      font-size: clamp(1.3rem, 2vw, 2rem);
+      color: #1a2a47;
+      border-left: 6px solid #4caf50;
+      padding-left: 14px;
+      margin-bottom: 30px;
+      font-size: clamp(1.5rem,2vw,2rem);
     }
 
+    /* Grille projets */
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+      gap: 28px;
     }
 
     .project-card {
-      background: white;
-      border-radius: 6px;
+      background:white;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 20px rgba(44,62,80,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
     }
 
     .project-card:hover,
     .project-card:focus-within {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 16px 35px rgba(39,174,96,0.3);
       outline: none;
     }
 
@@ -116,54 +112,57 @@
       width: 100%;
       height: 180px;
       object-fit: cover;
-      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover img {
+      transform: scale(1.05);
     }
 
     .project-card-content {
-      padding: 20px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
     }
 
     .project-card-content h3 {
       margin-top: 0;
-      color: #4caf50;
+      color: #27ae60;
       font-size: 1.3rem;
-      user-select: none;
     }
 
     .project-card-content p {
       font-size: 1rem;
       margin-top: 8px;
       color: #444;
+      flex-grow: 1;
     }
 
     .btn {
-      display: inline-flex;
-      align-items: center;
-      background-color: #4caf50;
-      color: white;
-      padding: 10px 15px;
-      text-decoration: none;
-      border-radius: 4px;
-      margin-top: 15px;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-      cursor: pointer;
-      gap: 6px;
+      display:inline-flex;
+      align-items:center;
+      background:#27ae60;
+      color:#fff;
+      padding:10px 18px;
+      border-radius:30px;
+      font-weight:600;
+      text-decoration:none;
+      gap:6px;
+      transition: all 0.3s;
+      margin-top: auto;
+      justify-self: start;
     }
 
     .btn:hover,
     .btn:focus-visible {
-      background-color: #388e3c;
-      box-shadow: 0 0 10px #388e3c;
+      background:#1e8449;
+      box-shadow:0 0 12px #1e8449;
       outline: none;
     }
 
-    /* Simple icon arrow for “Voir plus” */
     .btn svg {
-      width: 16px;
-      height: 16px;
+      width:16px; height:16px;
       fill: currentColor;
       transition: transform 0.3s ease;
     }
@@ -173,8 +172,9 @@
       transform: translateX(4px);
     }
 
+    /* Footer */
     footer {
-      background-color: #002147;
+      background-color: #1a2a47;
       color: white;
       text-align: center;
       padding: 20px;
@@ -184,36 +184,27 @@
       letter-spacing: 0.7px;
     }
 
-    footer p + p {
-      margin-top: 8px;
+    footer a {
+      color:#4caf50;
+      text-decoration:none;
+    }
+
+    footer a:hover {
+      text-decoration:underline;
     }
 
     /* Responsive */
     @media (max-width: 480px) {
-      nav a {
-        margin: 0 8px;
-        padding: 8px 10px;
-        font-size: 0.9rem;
-      }
-
-      .section {
-        padding: 30px 15px;
-      }
-
-      .project-card-content h3 {
-        font-size: 1.1rem;
-      }
-
-      .btn {
-        font-size: 0.95rem;
-        padding: 8px 12px;
-      }
+      nav a { margin:0 8px; padding:8px 10px; font-size:0.9rem; }
+      .section { padding:30px 15px; }
+      .project-card-content h3 { font-size:1.1rem; }
+      .btn { font-size:0.95rem; padding:8px 12px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Bannière avec image -->
+  <!-- Header -->
   <header class="header-banner" role="banner">
     <h1>Projets Sportifs Validés</h1>
   </header>
@@ -227,10 +218,9 @@
     <a href="#contact">Contact</a>
   </nav>
 
-  <!-- Contenu principal -->
+  <!-- Section principale -->
   <main class="section" role="main">
     <h2 class="section-title">Tous les projets</h2>
-
     <div class="project-grid">
       <article class="project-card" tabindex="0" aria-label="Projet Académie Football Kinshasa">
         <img src="https://images.unsplash.com/photo-1602357282871-7aa7ad36dd67?auto=format&fit=crop&w=600&q=80" alt="Football Kinshasa" loading="lazy" />
@@ -239,7 +229,7 @@
           <p>Formation de jeunes talents de 12 à 18 ans avec un encadrement professionnel dans la capitale.</p>
           <a class="btn" href="projet-kinshasa.html" aria-label="Voir plus sur Académie Football Kinshasa">
             Voir plus
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M8 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
@@ -253,7 +243,7 @@
           <p>Infrastructure sportive dédiée aux jeunes du Nord-Kivu pour l’entraînement et la compétition.</p>
           <a class="btn" href="projet-goma.html" aria-label="Voir plus sur Centre d’Athlétisme Goma">
             Voir plus
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M8 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
@@ -267,7 +257,7 @@
           <p>Encourager la pratique du basketball pour les jeunes filles du Haut-Katanga.</p>
           <a class="btn" href="projet-lubumbashi.html" aria-label="Voir plus sur Basket féminin Lubumbashi">
             Voir plus
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M8 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
@@ -281,7 +271,7 @@
           <p>Projet éducatif et sportif pour les enfants de la région Sud-Kivu, en partenariat avec des ONG locales.</p>
           <a class="btn" href="projet-bukavu.html" aria-label="Voir plus sur Camp Multisport Bukavu">
             Voir plus
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M8 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
@@ -292,11 +282,11 @@
 
   <!-- Footer -->
   <footer id="contact" role="contentinfo">
-    <p>Contact : <a href="mailto:info@icds-rdc.org" style="color:#4caf50; text-decoration:none;">info@icds-rdc.org</a> | +243 000 000 000</p>
+    <p>Contact : <a href="mailto:info@icds-rdc.org">info@icds-rdc.org</a> | +243 000 000 000</p>
     <p>Suivez-nous : 
-      <a href="#" style="color:#4caf50; text-decoration:none;">Facebook</a> | 
-      <a href="#" style="color:#4caf50; text-decoration:none;">Twitter</a> | 
-      <a href="#" style="color:#4caf50; text-decoration:none;">LinkedIn</a>
+      <a href="#">Facebook</a> | 
+      <a href="#">Twitter</a> | 
+      <a href="#">LinkedIn</a>
     </p>
   </footer>
 
