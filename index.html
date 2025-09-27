@@ -1,345 +1,321 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ICDS - Initiative Congolaise pour le Développement Sportif</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ICDS - Initiative Congolaise pour le Développement Sportif</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+}
 
-  <!-- Google Fonts -->
-  <link href="https://fois.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+/* HEADER & NAVIGATION */
+header { 
+  background: linear-gradient(135deg, #002147, #004d99); 
+  color: #f5f1f1; 
+  padding: 1rem; 
+  position: sticky; 
+  top: 0; 
+  z-index: 1000; 
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25); 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+}
 
-  <style>
-    /* RESET */
-    *, *::before, *::after { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: 'Open Sans', sans-serif;
-      color: #333;
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background-color: #f8f9fa;
-    }
+.logo img { height: 40px; }
 
-    /* Background image */
-    background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: url('PP.png') no-repeat center center/cover;
-      z-index: -1;
-    }
+/* NAVIGATION LARGE SCREEN */
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.nav-desktop a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.nav-desktop a:hover { background: #4CAF50; }
 
-    /* HEADER */
-    header {
-      background: rgba(0, 33, 71, 0.4);
-      backdrop-filter: blur(6px);
-      color: #f5f1f1;
-      padding: 1.5rem 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: transform 0.3s ease;
-    }
-    header.hidden { transform: translateY(-100%); }
-    .logo { display: flex; align-items: center; gap: 0.8rem; }
-    .logo img { height: 40px; width: auto; }
-    header h1 {
-      margin: 0;
-      font-weight: 700;
-      font-size: 1.6rem;
-      letter-spacing: 2px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    }
+/* BURGER & MENU MOBILE */
+.burger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  z-index: 1001;
+  transition: 0.3s;
+}
+.burger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: #fff;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+.burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-    /* NAVIGATION */
-    nav { position: relative; }
-    .nav-links {
-      display: flex;
-      gap: 1.2rem;
-      font-weight: 600;
-      font-size: 1rem;
-    }
-    .nav-links a {
-      color: #f7f7f7;
-      text-decoration: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 30px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    }
-    .nav-links a:hover,
-    .nav-links a:focus {
-      background-color: #4CAF50;
-      color: #fff;
-      outline: none;
-      box-shadow: 0 4px 12px rgba(76,175,80,0.7);
-    }
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 998;
+  transition: 0.3s;
+}
+.overlay.active { display: block; }
 
-    /* Hamburger menu */
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      width: 35px;
-      height: 30px;
-      cursor: pointer;
-      border: none;
-      background: none;
-      padding: 0;
-    }
-    .menu-toggle span {
-      display: block;
-      height: 4px;
-      background: white;
-      margin: 4px 0;
-      border-radius: 2px;
-      transition: 0.3s ease;
-    }
-    .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
-    .menu-toggle.open span:nth-child(2) { opacity: 0; }
-    .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  background: #002147;
+  position: fixed;
+  top: 0; right: -100%;
+  height: 100vh;
+  width: 250px;
+  padding: 2rem 1rem;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+  transition: right 0.3s ease-in-out;
+  z-index: 999;
+}
+.mobile-menu a {
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 6px;
+  color: #fff;
+  text-decoration: none;
+  display: block;
+}
+.mobile-menu a:hover { background: #4CAF50; }
+.mobile-menu.active { right: 0; }
 
-    /* Responsive menu */
-    @media (max-width: 768px) {
-      .nav-links {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background: rgba(0, 33, 71, 0.4);
-        backdrop-filter: blur(6px);
-        flex-direction: column;
-        width: 200px;
-        padding: 1rem 0;
-        border-radius: 0 0 12px 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(-10px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        z-index: 1001;
-      }
-      .nav-links.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
-      .nav-links a { padding: 0.8rem 1.5rem; font-size: 1.1rem; border-radius: 0; box-shadow: none; border-bottom: 1px solid rgba(255,255,255,0.15); }
-      .nav-links a:last-child { border-bottom: none; }
-      .menu-toggle { display: flex; }
-    }
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-desktop { display: none; }
+  .burger { display:flex; }
+}
 
-    /* SECTIONS */
-    .section {
-      max-width: 1100px;
-      margin: 3rem auto;
-      padding: 0 1rem;
-    }
-    .section h2 {
-      color: white;
-      border-left: 6px solid #4CAF50;
-      padding-left: 12px;
-      margin-bottom: 1.5rem;
-      font-weight: 700;
-      font-size: 1.8rem;
-      letter-spacing: 1px;
-    }
-    .section p {
-      font-size: 1.05rem;
-      max-width: 900px;
-      margin-bottom: 2rem;
-      color: white;
-    }
+/* HERO */
+.hero { background: url('PP.png') no-repeat center center/cover; color: white; text-align: center; padding: 6rem 1rem; position: relative; }
+.hero::after { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,33,71,0.65); }
+.hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+.hero h1 { font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700; }
+.hero p { font-size: 1.2rem; margin-bottom: 2rem; }
 
-    /* GRID CARDS */
-    .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1.8rem; }
-    .card {
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(6px);
-      border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-      padding: 1.8rem 1.5rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      cursor: pointer;
-      color: white;
-    }
-    .card:hover, .card:focus-within {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.4);
-    }
-    .card h3 { color: #4CAF50; margin-bottom: 1rem; font-weight: 700; font-size: 1.3rem; }
-    .card p { flex-grow: 1; font-size: 1rem; margin-bottom: 1.4rem; line-height: 1.4; color: white; }
+/* SECTIONS */
+.section { max-width: 1100px; margin: 3rem auto; padding: 0 1rem; }
+.section h2 { color: #002147; border-left: 6px solid #4CAF50; padding-left: 12px; margin-bottom: 1.5rem; font-size: 1.8rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1.8rem; }
+.card { background: white; border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); padding: 1.5rem; transition: 0.3s; }
+.card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+.card h3 { color: #4CAF50; margin-bottom: 1rem; }
+.btn { display: inline-block; background: #4CAF50; color: white; padding: 0.8rem 1.6rem; border-radius: 30px; text-decoration: none; font-weight: 600; transition: 0.3s; }
+.btn:hover { background: #388e3c; }
 
-    /* BUTTONS */
-    .btn {
-      display: inline-block;
-      background-color: #4CAF50;
-      color: white;
-      padding: 12px 28px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      box-shadow: 0 5px 15px rgba(76,175,80,0.5);
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-    }
-    .btn:hover, .btn:focus { background-color: #388e3c; box-shadow: 0 8px 25px rgba(56,142,60,0.8); outline: none; }
+/* IMPACT */
+.impact { background: transparent; padding: 3rem 1rem; text-align: center; }
+.impact h2 { color: #002147; margin-bottom: 2rem; font-size: 2rem; font-weight: 700; }
+.impact-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
+.stat { background: #fff; padding: 2rem 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); min-width: 180px; flex: 1 1 180px; transition: transform 0.3s; }
+.stat:hover { transform: translateY(-5px); }
+.stat .number { font-size: 2.5rem; font-weight: 700; color: #4CAF50; display: block; margin-bottom: 0.5rem; }
+.stat .label { font-size: 1rem; color: #333; display: block; }
 
-    /* SPONSORS */
-    .sponsor-section { max-width: 1100px; margin: 3rem auto; padding: 0 1rem; text-align: center; }
-    .sponsor-section h2 { color: white; border-left: 6px solid #4CAF50; padding-left: 12px; margin-bottom: 2rem; font-weight: 700; font-size: 1.8rem; text-align: left; }
-    .sponsor-carousel { display: flex; gap: 2rem; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 1rem; scrollbar-width: none; -ms-overflow-style: none; }
-    .sponsor-carousel::-webkit-scrollbar { display: none; }
-    .sponsor-carousel a {
-      flex: 0 0 auto;
-      width: 120px;
-      height: 70px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(6px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
-    }
-    .sponsor-carousel a img { max-width: 80%; max-height: 80%; object-fit: contain; }
-    .sponsor-carousel a:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 30px rgba(76,175,80,0.5);
-      backdrop-filter: blur(10px);
-    }
+/* SPONSORS */
+.sponsor-section { max-width: 1100px; margin: 3rem auto; padding: 0 1rem; text-align: center; }
+.sponsor-section h2 { color: #002147; border-left: 6px solid #4CAF50; padding-left: 12px; margin-bottom: 1.5rem; font-size: 1.8rem; text-align: left; max-width: 1100px; margin-left: auto; margin-right: auto; }
+.sponsor-carousel { display:flex; gap:1.5rem; overflow-x:auto; scroll-behavior:smooth; padding-bottom:1rem; scrollbar-width:none; -ms-overflow-style:none; }
+.sponsor-carousel::-webkit-scrollbar { display:none; }
+.sponsor-carousel a { flex:0 0 auto; width:140px; height:80px; border-radius:8px; background:white; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,0.08); transition:transform .3s; }
+.sponsor-carousel a img { max-width:100%; max-height:100%; object-fit:contain; }
+.sponsor-carousel a:hover { transform:scale(1.05); box-shadow:0 10px 25px rgba(0,0,0,0.15); }
 
-    /* FOOTER */
-    footer {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(8px);
-      color: white;
-      text-align: center;
-      padding: 1rem 1rem;
-      font-size: 0.9rem;
-    }
-    footer p { margin: 0.3rem 0; font-weight: 300; }
+/* TEXTE SOUS LES LOGOS */
+.sponsor-text {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #444;
+}
 
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      header h1 { font-size: 1.3rem; }
-      .section h2 { font-size: 1.5rem; }
-      .btn { padding: 10px 22px; font-size: 0.95rem; }
-      .sponsor-carousel a { width: 90px; height: 50px; }
-    }
-    @media (max-width: 480px) {
-      header h1 { font-size: 1.1rem; }
-      .section h2 { font-size: 1.3rem; }
-      .btn { padding: 8px 18px; font-size: 0.9rem; }
-    }
-  </style>
+/* NEWSLETTER */
+.newsletter-section { background:#f7f9fc; padding:2rem 1rem; text-align:center; }
+.newsletter-section h2 { color:#002147; margin-bottom:1rem; font-size:1.6rem; }
+.newsletter-section p { margin-bottom:1.2rem; color:#444; }
+.newsletter-form { display:flex; justify-content:center; gap:0.5rem; max-width:500px; margin:0 auto; flex-wrap:wrap; }
+.newsletter-form input { flex:1; min-width:220px; padding:0.75rem 1rem; border:1px solid #ccc; border-radius:6px; }
+.newsletter-form button { padding:0.75rem 1.5rem; background:#4CAF50; color:white; border:none; border-radius:6px; cursor:pointer; transition:background 0.3s; }
+.newsletter-form button:hover { background:#388e3c; }
+
+footer { background: rgba(0,33,71,0.9); color: white; text-align: center; padding: 2rem 1rem; margin-top: auto; }
+
+@media(max-width:768px){
+  .impact-stats{flex-direction:column;gap:1rem;} 
+  .sponsor-carousel a { width:110px; height:60px; }
+}
+</style>
 </head>
 <body>
 
-  <background></background>
+<!-- HEADER & MENU -->
+<header>
+  <div class="logo">
+    <img src="logo.jpg" alt="Logo ICDS" />
+  </div>
+  <div class="nav-desktop">
+    <a href="#">Accueil</a>
+    <a href="#a-propos">À propos</a>
+    <a href="#projet">Projets</a>
+    <a href="#actus">Actualités</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="burger" id="burger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#">Accueil</a>
+    <a href="#a-propos">À propos</a>
+    <a href="#projet">Projets</a>
+    <a href="#actus">Actualités</a>
+    <a href="#contact">Contact</a>
+  </div>
+</header>
 
-  <header>
-    <div class="logo">
-      <img src="logo.jpg" alt="Logo ICDS" />
-      <h1>ICDS - Initiative Congolaise pour le Développement Sportif</h1>
+<div class="overlay" id="overlay"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>ICDS - Initiative Congolaise pour le Développement Sportif</h1>
+    <p>Promouvoir le sport et inspirer la jeunesse en RDC</p>
+    <a href="#projet" class="btn">Découvrir nos projets</a>
+  </div>
+</section>
+
+<!-- Sections inchangées -->
+<section class="section" id="a-propos">
+  <h2>À propos de l’ICDS</h2>
+  <p>L’ICDS est une initiative qui vise à développer le sport en République Démocratique du Congo en connectant les jeunes talents, les projets sportifs et les partenaires.</p>
+</section>
+
+<section class="section" id="projet">
+  <h2>Projets à la une</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Académie de football Kinshasa</h3>
+      <p>Formation des jeunes talents (12-18 ans) dans la capitale congolaise avec un suivi académique et sportif.</p>
     </div>
-    <nav>
-      <button class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="primary-navigation">
-        <span></span><span></span><span></span>
-      </button>
-      <div class="nav-links" id="primary-navigation" role="menu">
-        <a href="#">Accueil</a>
-        <a href="projets.html">Projets</a>
-        <a href="actualites.html">Actualités</a>
-        <a href="sponsors.html">Sponsors</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </nav>
-  </header>
-
-  <section class="section" id="a-propos">
-    <h2>À propos de l’ICDS</h2>
-    <p>L’ICDS est une initiative visant à promouvoir le développement du sport en République Démocratique du Congo en facilitant la mise en relation entre porteurs de projets sportifs et sponsors.</p>
-  </section>
-
-  <section class="section" id="projet">
-    <h2>Projets sportifs à la une</h2>
-    <div class="grid">
-      <article class="card">
-        <h3>Académie de football Kinshasa</h3>
-        <p>Un projet pour former les jeunes talents de 12 à 18 ans dans la capitale congolaise.</p>
-      </article>
-      <article class="card">
-        <h3>Centre d’athlétisme de Goma</h3>
-        <p>Création d’un espace d’entraînement pour les jeunes athlètes du Nord-Kivu.</p>
-      </article>
+    <div class="card">
+      <h3>Centre d’athlétisme de Goma</h3>
+      <p>Création d’un espace moderne pour l’entraînement des jeunes athlètes du Nord-Kivu.</p>
     </div>
-    <br />
-    <a class="btn" href="projets.html">Voir tous les projets</a>
-  </section>
+  </div>
+  <br>
+  <a class="btn" href="projets.html">Voir tous les projets</a>
+</section>
 
-  <section class="section" id="actus">
-    <h2>Actualités sportives</h2>
-    <div class="grid">
-      <article class="card">
-        <h3>Championnat U20 2025</h3>
-        <p>Les jeunes équipes régionales s’affrontent à Kinshasa dans un tournoi national.</p>
-      </article>
-      <article class="card">
-        <h3>Lancement du Forum national</h3>
-        <p>Un événement inédit sur le sponsoring sportif prévu en novembre.</p>
-      </article>
+<section class="section" id="actus">
+  <h2>Actualités</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Championnat U20 2025</h3>
+      <p>Les jeunes équipes régionales s’affrontent à Kinshasa dans un tournoi national.</p>
     </div>
-    <br />
-    <a class="btn" href="actualites.html">Voir toutes les actualités</a>
-  </section>
-
-  <section class="sponsor-section">
-    <h2>Nos sponsors partenaires</h2>
-    <div class="sponsor-carousel">
-      <a href="#"><img src="sponsor1-logo.png" alt="Logo Sponsor 1" /></a>
-      <a href="#"><img src="sponsor2-logo.png" alt="Logo Sponsor 2" /></a>
-      <a href="#"><img src="sponsor3-logo.png" alt="Logo Sponsor 3" /></a>
-      <a href="#"><img src="sponsor4-logo.png" alt="Logo Sponsor 4" /></a>
-      <a href="#"><img src="sponsor5-logo.png" alt="Logo Sponsor 5" /></a>
+    <div class="card">
+      <h3>Lancement du Forum national</h3>
+      <p>Un événement inédit sur le sponsoring sportif prévu en novembre.</p>
     </div>
-  </section>
+  </div>
+  <br>
+  <a class="btn" href="actualites.html">Voir toutes les actualités</a>
+</section>
 
-  <footer id="contact">
-    <p>© 2025 ICDS. Tous droits réservés.</p>
-    <p>Contact : contact@icds-rdc.org | +243 123 456 789</p>
-  </footer>
+<section class="impact">
+  <h2>Notre impact en chiffres</h2>
+  <div class="impact-stats">
+    <div class="stat"><span class="number" data-target="500">0</span><span class="label">Étudiants impactés</span></div>
+    <div class="stat"><span class="number" data-target="10">0</span><span class="label">Projets lancés</span></div>
+    <div class="stat"><span class="number" data-target="15">0</span><span class="label">Fonceurs partenaires</span></div>
+  </div>
+</section>
 
-  <script>
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
+<section class="sponsor-section" aria-label="Sponsors">
+  <h2>Nos partenaires</h2>
+  <div class="sponsor-carousel" role="list">
+    <a href="#" role="listitem"><img src="sponsor1-logo.png" alt="Sponsor 1"></a>
+    <a href="#" role="listitem"><img src="sponsor2-logo.png" alt="Sponsor 2"></a>
+    <a href="#" role="listitem"><img src="sponsor3-logo.png" alt="Sponsor 3"></a>
+    <a href="#" role="listitem"><img src="sponsor4-logo.png" alt="Sponsor 4"></a>
+    <a href="#" role="listitem"><img src="sponsor5-logo.png" alt="Sponsor 5"></a>
+  </div>
+  <p class="sponsor-text">
+    Vous souhaitez devenir partenaire ? Téléchargez notre 
+    <a href="dossier-sponsoring.pdf">dossier de sponsoring</a> ou contactez-nous à 
+    <a href="mailto:contact@icds-rdc.org">contact@icds-rdc.org</a>.
+  </p>
+</section>
 
-    menuToggle.addEventListener('click', () => {
-      const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-      menuToggle.setAttribute('aria-expanded', !expanded);
-      menuToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
+<section class="newsletter-section" aria-label="Newsletter">
+  <h2>Abonnez-vous à notre newsletter</h2>
+  <p>Recevez nos actualités, projets et opportunités directement dans votre boîte mail.</p>
+  <form class="newsletter-form">
+    <input type="email" placeholder="Votre adresse e-mail" required>
+    <button type="submit">S'abonner</button>
+  </form>
+</section>
+
+<footer id="contact">
+  <p>© 2025 ICDS. Tous droits réservés.</p>
+  <p>Contact : contact@icds-rdc.org | +243 123 456 789</p>
+</footer>
+
+<script>
+// Animation des chiffres
+const counters = document.querySelectorAll('.number');
+const speed = 200;
+counters.forEach(counter => {
+  const updateCount = () => {
+    const target = +counter.getAttribute('data-target');
+    const count = +counter.innerText;
+    const increment = target / speed;
+    if(count < target){
+      counter.innerText = Math.ceil(count + increment);
+      setTimeout(updateCount, 15);
+    } else { counter.innerText = target; }
+  };
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){ updateCount(); observer.unobserve(counter); }
     });
+  }, { threshold: 0.5 });
+  observer.observe(counter);
+});
 
-    let lastScroll = 0;
-    const header = document.querySelector('header');
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-      if (currentScroll > lastScroll && currentScroll > 100) {
-        header.classList.add('hidden');
-      } else {
-        header.classList.remove('hidden');
-      }
-      lastScroll = currentScroll <= 0 ? 0 : currentScroll;
-    });
-  </script>
-
+// BURGER MENU
+const burger = document.getElementById("burger");
+const mobileMenu = document.getElementById("mobileMenu");
+const overlay = document.getElementById("overlay");
+const toggleMenu = () => { mobileMenu.classList.toggle("active"); overlay.classList.toggle("active"); burger.classList.toggle("open"); }
+burger.addEventListener("click", toggleMenu);
+overlay.addEventListener("click", toggleMenu);
+document.querySelectorAll(".mobile-menu a").forEach(link => link.addEventListener("click", toggleMenu));
+</script>
 </body>
 </html>
