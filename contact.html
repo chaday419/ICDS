@@ -43,9 +43,13 @@
       top: 0;
       z-index: 100;
     }
+    nav .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+    }
     nav a {
       color: #fff;
-      margin: 0 18px;
       font-weight: 600;
       font-size: 1rem;
       padding: 8px 14px;
@@ -57,6 +61,55 @@
       background-color: #4caf50;
       box-shadow: 0 0 8px #4caf50cc;
       outline: none;
+    }
+
+    /* BURGER */
+    .burger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      position: absolute;
+      top: 18px;
+      right: 20px;
+    }
+    .burger span {
+      width: 26px;
+      height: 3px;
+      background: #fff;
+      margin: 5px 0;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* MENU MOBILE REDUIT */
+    .nav-links.mobile {
+      display: none;
+      flex-direction: column;
+      background: #002147;
+      position: absolute;
+      top: 65px;
+      right: 10px;
+      width: 80%;
+      max-width: 280px;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+      animation: slideDown 0.3s ease forwards;
+    }
+    .nav-links.mobile a {
+      margin: 8px 0;
+      text-align: left;
+      display: block;
+      padding: 10px;
+      border-radius: 6px;
+    }
+    .nav-links.mobile a:hover {
+      background: #4caf50;
+    }
+
+    @keyframes slideDown {
+      from {opacity: 0; transform: translateY(-10px);}
+      to {opacity: 1; transform: translateY(0);}
     }
 
     /* HEADER */
@@ -221,15 +274,17 @@
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
+      nav .nav-links.desktop {
+        display: none;
+      }
+      .burger {
+        display: flex;
+      }
       header h1 {
         font-size: 2.1rem;
       }
       header p {
         font-size: 1.05rem;
-      }
-      nav a {
-        margin: 0 12px;
-        font-size: 0.9rem;
       }
       main {
         margin: 25px 20px 50px;
@@ -253,13 +308,29 @@
 
   <!-- Navigation -->
   <nav>
-    <a href="index.html">Accueil</a>
-    <a href="projets.html">Projets</a>
-    <a href="soumettre-projet.html">Soumettre un projet</a>
-    <a href="sponsors.html">Sponsors</a>
-    <a href="actualites.html">Actualités</a>
-    <a href="forum.html">Forum</a>
-    <a href="contact.html" aria-current="page">Contact</a>
+    <div class="nav-links desktop">
+      <a href="index.html">Accueil</a>
+      <a href="projets.html">Projets</a>
+      <a href="soumettre-projet.html">Soumettre un projet</a>
+      <a href="sponsors.html">Sponsors</a>
+      <a href="actualites.html">Actualités</a>
+      <a href="forum.html">Forum</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </div>
+    <div class="burger" id="burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="nav-links mobile" id="mobileMenu">
+      <a href="index.html">Accueil</a>
+      <a href="projets.html">Projets</a>
+      <a href="soumettre-projet.html">Soumettre un projet</a>
+      <a href="sponsors.html">Sponsors</a>
+      <a href="actualites.html">Actualités</a>
+      <a href="forum.html">Forum</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </div>
   </nav>
 
   <!-- Header -->
@@ -308,6 +379,20 @@
   <footer role="contentinfo">
     <p>© 2025 ICDS - Initiative Congolaise pour le Développement Sportif</p>
   </footer>
+
+  <script>
+    const burger = document.getElementById("burger");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    burger.addEventListener("click", () => {
+      mobileMenu.classList.toggle("open");
+      if (mobileMenu.classList.contains("open")) {
+        mobileMenu.style.display = "flex";
+      } else {
+        mobileMenu.style.display = "none";
+      }
+    });
+  </script>
 
 </body>
 </html>
