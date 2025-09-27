@@ -17,13 +17,12 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Menu style semi-transparent */
+    /* Menu style YouTube */
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: rgba(26, 42, 71, 0.85);
-      backdrop-filter: blur(8px);
+      background-color: #1a2a47;
       padding: 15px 25px;
       position: sticky;
       top: 0;
@@ -47,10 +46,9 @@
       padding: 6px 12px;
       border-radius: 30px;
       transition: all 0.3s ease;
-      background-color: rgba(255, 255, 255, 0.05);
     }
     .nav-links a:hover {
-      background-color: rgba(76, 175, 80, 0.9);
+      background-color: #4CAF50;
       color: #fff;
     }
     .menu-toggle {
@@ -81,8 +79,7 @@
         position: absolute;
         top: 100%;
         right: 0;
-        background: rgba(26, 42, 71, 0.85);
-        backdrop-filter: blur(8px);
+        background: #1a2a47;
         flex-direction: column;
         width: 220px;
         padding: 10px 0;
@@ -117,19 +114,13 @@
       box-shadow: 0 6px 15px rgba(46, 204, 113, 0.4);
     }
     header h1 {
-      font-size: 2.8rem;
-      margin: 0 0 8px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
-    }
-    header p {
-      font-size: 1.25rem;
-      font-weight: 400;
-      max-width: 600px;
-      margin: 0 auto;
-      opacity: 0.9;
-    }
+  font-size: 2.8rem;
+  margin: 0 0 8px; /* réduit l'espace sous le titre */
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+}
+    header p { font-size: 1.25rem; font-weight: 400; max-width: 600px; margin: 0 auto; opacity: 0.9; }
 
     /* Filters */
     .filters { max-width: 1100px; margin: 0 auto 40px; padding: 0 20px; text-align: center; }
@@ -155,17 +146,7 @@
     .read-more { align-self: flex-start; color: #27ae60; text-decoration: none; font-weight: 700; font-size: 1rem; letter-spacing: 0.03em; border-bottom: 2px solid transparent; transition: border-color 0.3s ease; }
     .read-more:hover { border-color: #27ae60; text-decoration: none; }
 
-    /* Footer semi-transparent */
-    footer {
-      background-color: rgba(26, 42, 71, 0.85);
-      backdrop-filter: blur(6px);
-      color: white;
-      text-align: center;
-      padding: 24px 15px;
-      font-size: 0.95rem;
-      letter-spacing: 0.04em;
-      box-shadow: inset 0 3px 10px rgba(0,0,0,0.3);
-    }
+    footer { background-color: #1a2a47; color: white; text-align: center; padding: 24px 15px; font-size: 0.95rem; letter-spacing: 0.04em; box-shadow: inset 0 3px 10px rgba(0,0,0,0.3); }
     footer p { margin: 6px 0; }
     footer a { color: #4CAF50; text-decoration: none; font-weight: 600; margin: 0 6px; transition: color 0.3s ease; }
     footer a:hover { color: #27ae60; text-decoration: underline; }
